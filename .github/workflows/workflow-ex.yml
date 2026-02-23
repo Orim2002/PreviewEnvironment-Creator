@@ -40,7 +40,7 @@ jobs:
           apiVersion: devops.orima.com/v1
           kind: PreviewEnvironment
           metadata:
-            name: pr-${{ github.event.pull_request.number }}-env
+            name: "pr-${{ github.event.pull_request.number }}-env"
             namespace: default
           spec:
             pr_number: ${{ github.event.pull_request.number }}
