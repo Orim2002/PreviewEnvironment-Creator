@@ -11,10 +11,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build and Push Docker Image
-        run: |
-          docker build -t my-registry.com/my-app:${{ github.sha }} .
-          docker push my-registry.com/my-app:${{ github.sha }}
+      - name: Set Image Tag
+        id: vars
+        run: echo "tag=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/custom-operator:${{ steps.vars.outputs.tag }}
 
       - name: Configure Kubernetes Credentials
         uses: azure/k8s-set-context@v3
@@ -33,8 +45,8 @@ jobs:
           spec:
             pr_number: ${{ github.event.pull_request.number }}
             branch_name: "${{ github.head_ref }}"
-            image: "nginx"
-            image_tag: "latest"
+            image: "my-app"
+            image_tag: ${{ steps.vars.outputs.tag }}
           EOF
 
   teardown-preview:
