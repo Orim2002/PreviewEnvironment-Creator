@@ -1,3 +1,4 @@
 FROM python:3.12-slim
-COPY test.py .
-CMD ["python3", "test.py"]
+COPY cr.yaml .
+EXPOSE 8000
+CMD ["python3", "-m" , "http.server"]
