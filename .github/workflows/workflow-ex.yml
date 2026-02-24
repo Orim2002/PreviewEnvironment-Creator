@@ -46,7 +46,7 @@ jobs:
             pr_number: ${{ github.event.pull_request.number }}
             branch_name: "${{ github.head_ref }}"
             image: "${{ secrets.DOCKERHUB_USERNAME }}/my-app"
-            image_tag: ${{ steps.vars.outputs.tag }}
+            image_tag: "${{ steps.vars.outputs.tag }}"
           EOF
 
   teardown-preview:
