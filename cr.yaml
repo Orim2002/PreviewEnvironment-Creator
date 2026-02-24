@@ -1,7 +1,7 @@
 apiVersion: devops.orima.com/v1
 kind: PreviewEnvironment
 metadata:
-  name: pr-123-env
+  name: pr-12345-env
 spec:
   pr_number: 12345
   branch_name: "dev"
