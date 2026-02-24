@@ -61,4 +61,4 @@ jobs:
 
       - name: Delete Custom Resource
         run: |
-          kubectl delete previewenvironment pr-${{ github.event.pull_request.number }}-env --ignore-not-found
+          kubectl delete previewenvironment pr-${{ github.event.pull_request.number }}-env -n preview --ignore-not-found
