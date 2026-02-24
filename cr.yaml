@@ -1,9 +1,9 @@
 apiVersion: devops.orima.com/v1
 kind: PreviewEnvironment
 metadata:
-  name: pr-12345-env
+  name: pr-1234-env
 spec:
-  pr_number: 12345
+  pr_number: 1234
   branch_name: "dev"
   image: "nginx"
   image_tag: "latest"
