@@ -3,7 +3,7 @@ kind: PreviewEnvironment
 metadata:
   name: pr-123-env
 spec:
-  pr_number: 1234
+  pr_number: 12345
   branch_name: "dev"
   image: "nginx"
   image_tag: "latest"
