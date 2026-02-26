@@ -41,7 +41,7 @@ jobs:
           kind: PreviewEnvironment
           metadata:
             name: "pr-${{ github.event.pull_request.number }}-env"
-            namespace: preview
+            namespace: preview-environments
           spec:
             pr_number: ${{ github.event.pull_request.number }}
             branch_name: "${{ github.head_ref }}"
