@@ -1,9 +1,9 @@
 apiVersion: devops.orima.com/v1
 kind: PreviewEnvironment
 metadata:
-  name: pr-15-env
+  name: pr-11-env
 spec:
-  pr_number: 15
+  pr_number: 11
   branch_name: "dev"
   image: "orima2002/my-app"
   image_tag: "latest"
