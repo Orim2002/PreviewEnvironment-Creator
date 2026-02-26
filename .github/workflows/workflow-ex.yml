@@ -41,7 +41,7 @@ jobs:
           kind: PreviewEnvironment
           metadata:
             name: "pr-${{ github.event.pull_request.number }}-env"
-            namespace: preview
+            namespace: preview-environments
           spec:
             pr_number: ${{ github.event.pull_request.number }}
             branch_name: "${{ github.head_ref }}"
@@ -61,4 +61,4 @@ jobs:
 
       - name: Delete Custom Resource
         run: |
-          kubectl delete previewenvironment pr-${{ github.event.pull_request.number }}-env -n preview --ignore-not-found
+          kubectl delete previewenvironment pr-${{ github.event.pull_request.number }}-env -n preview-environments --ignore-not-found
