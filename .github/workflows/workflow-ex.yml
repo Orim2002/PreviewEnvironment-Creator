@@ -37,18 +37,23 @@ jobs:
           kubeconfig: ${{ secrets.KUBECONFIG }}
 
       - name: Generate and Apply Custom Resource
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          BRANCH_NAME: ${{ github.head_ref }}
+          IMAGE_TAG: ${{ steps.vars.outputs.tag }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
           cat <<EOF | kubectl apply -f -
           apiVersion: devops.orima.com/v1
           kind: PreviewEnvironment
           metadata:
-            name: "pr-${{ github.event.pull_request.number }}-env"
+            name: "pr-${PR_NUMBER}-env"
             namespace: preview-environments
           spec:
-            pr_number: ${{ github.event.pull_request.number }}
-            branch_name: "${{ github.head_ref }}"
-            image: "${{ secrets.DOCKERHUB_USERNAME }}/my-app"
-            image_tag: "${{ steps.vars.outputs.tag }}"
+            pr_number: ${PR_NUMBER}
+            branch_name: "${BRANCH_NAME}"
+            image: "${DOCKERHUB_USERNAME}/my-app"
+            image_tag: "${IMAGE_TAG}"
           EOF
 
       - name: Wait for namespace to be created
